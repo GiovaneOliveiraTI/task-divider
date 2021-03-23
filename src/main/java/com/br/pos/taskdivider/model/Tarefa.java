@@ -1,8 +1,6 @@
 package com.br.pos.taskdivider.model;
 
 import com.br.pos.taskdivider.model.enums.StatusTarefa;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,6 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @Table(name = "tarefas")
+@NamedQuery(name = "Tarefa.tarefasPorCategoria", query = "select t from Tarefa t inner join t.categoria c where c.nome = ?1 ")
 public class Tarefa {
 
     @Id
