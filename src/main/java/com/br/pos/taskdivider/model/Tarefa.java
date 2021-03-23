@@ -1,14 +1,16 @@
 package com.br.pos.taskdivider.model;
 
 import com.br.pos.taskdivider.model.enums.StatusTarefa;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@EqualsAndHashCode
+@AllArgsConstructor
 @Entity
 @Table(name = "tarefas")
 public class Tarefa {
