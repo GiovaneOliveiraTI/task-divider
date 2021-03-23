@@ -29,8 +29,12 @@ public class Tarefa {
     @Column(name = "visivel")
     private Boolean visivel;
 
-//    private Categoria categoria;
-//
-//    private Usuario usuario;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Categoria categoria;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Usuario usuario;
 
 }
