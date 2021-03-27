@@ -60,14 +60,6 @@ public class CarregaBaseDeDados {
             tarefa2.setUsuario(usuario);
             tarefaRepository.save(tarefa2);
 
-            Tarefa tarefa3 = new Tarefa();
-            tarefa3.setDescricao("Aprender JPA ");
-            tarefa3.setDataEntrega(LocalDate.now().plusDays(1));
-            tarefa3.setStatus(StatusTarefa.ABERTO);
-            tarefa3.setVisivel(true);
-            tarefa3.setCategoria(categoria);
-            tarefa3.setUsuario(usuario);
-            tarefaRepository.save(tarefa3);
         };
     }
 }
