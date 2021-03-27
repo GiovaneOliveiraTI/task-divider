@@ -2,10 +2,13 @@ package com.br.pos.taskdivider.model;
 
 import com.br.pos.taskdivider.model.enums.StatusTarefa;
 import lombok.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -13,7 +16,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode
 @AllArgsConstructor
 @Entity
 @Table(name = "tarefas")
@@ -24,21 +26,19 @@ public class Tarefa implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-
+    @NotNull
     @NotBlank(message = "{tarefa.descricao.not-blank}")
     @Size(min = 5, max = 150, message = "{tarefa.descricao.size}")
     @Column(name = "ds_tarefa", nullable = false, length = 150)
     private String descricao;
 
     @Enumerated(EnumType.STRING)
-    private StatusTarefa status;
+    private StatusTarefa status = StatusTarefa.ABERTO;
 
-    @FutureOrPresent( message = "{tarefa.descricao.future-or-present}")
-    @Column(name = "dtEntrega")
+    @FutureOrPresent(message = "{tarefa.descricao.future-or-present}")
     private LocalDate dataEntrega;
 
-    @Column(name = "visivel")
-    private Boolean visivel;
+    private boolean visivel = true;
 
     @ManyToOne
     @JoinColumn(nullable = false)
