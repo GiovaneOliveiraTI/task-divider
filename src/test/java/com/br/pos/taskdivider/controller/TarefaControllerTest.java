@@ -1,5 +1,6 @@
 package com.br.pos.taskdivider.controller;
 
+import com.br.pos.taskdivider.controller.response.TarefaResponse;
 import com.br.pos.taskdivider.model.Categoria;
 import com.br.pos.taskdivider.model.Tarefa;
 import com.br.pos.taskdivider.model.Usuario;
@@ -42,12 +43,12 @@ public class TarefaControllerTest {
 		
 		Mockito.when(service.getTarefaPorId(tarefaId)).thenReturn(tarefa);
 		
-//		TarefaResponse tarefaResp = controller.buscarPorId(tarefaId);
-//
-//		Assertions.assertEquals(tarefaId, tarefaResp.getId());
-//		Assertions.assertEquals(2, tarefaResp.getCategoriaId());
-//		Assertions.assertEquals(1, tarefaResp.getUsuarioId());
-//		Assertions.assertEquals(StatusTarefa.ABERTO.name(), tarefaResp.getStatus());
+		TarefaResponse tarefaResp = controller.buscarPorId(tarefaId);
+
+		Assertions.assertEquals(tarefaId, tarefaResp.getId());
+		Assertions.assertEquals(2, tarefaResp.getCategoriaId());
+		Assertions.assertEquals(1, tarefaResp.getUsuarioId());
+		Assertions.assertEquals(StatusTarefa.ABERTO.name(), tarefaResp.getStatus());
 	}
 	
 }

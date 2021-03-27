@@ -1,5 +1,6 @@
 package com.br.pos.taskdivider.services;
 
+import com.br.pos.taskdivider.controller.response.TarefaResponse;
 import com.br.pos.taskdivider.exception.TarefaStatusException;
 import com.br.pos.taskdivider.model.Tarefa;
 import com.br.pos.taskdivider.model.enums.StatusTarefa;
@@ -50,9 +51,9 @@ public class TarefaService {
 
     public  Tarefa concluirTarefaPorId(Integer id) {
         Tarefa tarefa = getTarefaPorId(id);
-//
-//        if (StatusTarefa.CONCLUIDA.equals(tarefa.getStatus()))
-//            throw new TarefaStatusException();
+
+        if (StatusTarefa.CONCLUIDA.equals(tarefa.getStatus()))
+            throw new TarefaStatusException();
 
 
         tarefa.setStatus(StatusTarefa.CONCLUIDA);
