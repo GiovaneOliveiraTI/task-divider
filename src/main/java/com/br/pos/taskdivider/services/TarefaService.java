@@ -1,6 +1,5 @@
 package com.br.pos.taskdivider.services;
 
-import com.br.pos.taskdivider.controller.response.TarefaResponse;
 import com.br.pos.taskdivider.exception.TarefaStatusException;
 import com.br.pos.taskdivider.model.Tarefa;
 import com.br.pos.taskdivider.model.enums.StatusTarefa;
@@ -37,28 +36,38 @@ public class TarefaService {
         repository.deleteById(id);
     }
 
-    public  Tarefa iniciarTarefaPorId(Integer id) {
+    public Tarefa iniciarTarefaPorId(Integer id) {
         Tarefa tarefa = getTarefaPorId(id);
 
-        if (StatusTarefa.ABERTO.equals(tarefa.getStatus()))
-            throw new TarefaStatusException();
-
+        if (!StatusTarefa.ABERTO.equals(tarefa.getStatus()))
+            throw new TarefaStatusException("Não é possível iniciar a tarefa com status "
+                    + tarefa.getStatus().name());
 
         tarefa.setStatus(StatusTarefa.EM_ANDAMENTO);
-        repository.save(tarefa);
-        return tarefa;
+
+        return salvarTarefa(tarefa);
     }
 
-    public  Tarefa concluirTarefaPorId(Integer id) {
+    public Tarefa concluirTarefaPorId(Integer id) {
+        Tarefa tarefa = getTarefaPorId(id);
+
+        if (StatusTarefa.CANCELADA.equals(tarefa.getStatus()))
+            throw new TarefaStatusException("Não é possível concluir uma tarefa cancelada");
+
+        tarefa.setStatus(StatusTarefa.CONCLUIDA);
+
+        return salvarTarefa(tarefa);
+    }
+
+
+    public Tarefa cancelarTarefaPorId(Integer id) {
         Tarefa tarefa = getTarefaPorId(id);
 
         if (StatusTarefa.CONCLUIDA.equals(tarefa.getStatus()))
-            throw new TarefaStatusException();
+            throw new TarefaStatusException("Não é possível cancelar uma tarefa concluída");
 
-
-        tarefa.setStatus(StatusTarefa.CONCLUIDA);
-        repository.save(tarefa);
-        return tarefa;
+        tarefa.setStatus(StatusTarefa.CANCELADA);
+        return salvarTarefa(tarefa);
     }
 
 
