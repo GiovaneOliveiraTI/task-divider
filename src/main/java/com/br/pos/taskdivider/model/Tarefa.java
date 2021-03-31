@@ -2,10 +2,8 @@ package com.br.pos.taskdivider.model;
 
 import com.br.pos.taskdivider.model.enums.StatusTarefa;
 import lombok.*;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

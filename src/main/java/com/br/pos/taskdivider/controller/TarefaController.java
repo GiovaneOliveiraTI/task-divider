@@ -81,19 +81,19 @@ public class TarefaController {
     }
 
     @PutMapping("/{id}/iniciar")
-    public EntityModel<TarefaResponse> iniciarTarefa(@PathVariable Integer id) {
+    public EntityModel<TarefaResponse> iniciarTarefa(@Valid @PathVariable Integer id) {
         Tarefa tarefa = service.iniciarTarefaPorId(id);
         return assembler.toModel(tarefa);
     }
 
     @PutMapping("/{id}/concluir")
-    public EntityModel<TarefaResponse> concluirTarefa(@PathVariable Integer id) {
+    public EntityModel<TarefaResponse> concluirTarefa(@Valid @PathVariable Integer id) {
         Tarefa tarefa = service.concluirTarefaPorId(id);
         return assembler.toModel(tarefa);
     }
 
     @PutMapping("/{id}/cancelar")
-    public EntityModel<TarefaResponse> cancelarTarefa(@PathVariable Integer id) {
+    public EntityModel<TarefaResponse> cancelarTarefa(@Valid@PathVariable Integer id) {
         Tarefa tarefa = service.cancelarTarefaPorId(id);
         return assembler.toModel(tarefa);
     }
