@@ -1,5 +1,7 @@
 package com.br.pos.taskdivider.security;
 
+import com.br.pos.taskdivider.services.UserDetailsServiceImple;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,6 +23,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] PATHS = new String[]{"/tarefa/**", "/categoria/**", "/usuario/**"};
 
+    @Autowired
+     private UserDetailsServiceImple userDetailsService;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -34,11 +39,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .passwordEncoder(passwordEncoder())
-                .withUser("usuario")
-                .password(passwordEncoder().encode("senha"))
-                .roles("USER");
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder());
+
     }
 
     protected void configure(HttpSecurity http) throws Exception {

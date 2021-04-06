@@ -31,4 +31,10 @@ public class Role implements Serializable {
 	@Column(length = 20)
 	private ERole name;
 
+	public Role(ERole name) {
+		this.name = name;
+	}
+
+
+
 }
